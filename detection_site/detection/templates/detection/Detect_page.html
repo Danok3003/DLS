@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'detection/detect.css' %}" rel="stylesheet">
+    <meta name="viewport" content="height=device-height,
+                      width=device-width, initial-scale=1.0,
+                      minimum-scale=1.0, maximum-scale=1.0,
+                      user-scalable=no, target-densitydpi=device-dpi">
+    <title>Детектирование дорожных знаков</title>
+</head>
+<body>
+
+<div class="wrapper_body">
+    <div class="det_title">
+        <p>Детектирование дорожных знаков</p>
+        <p class="class_det">Классы: "Ограничение скорости", "Пешеходный переход", "Стоп", "Въезд запрещен"</p>
+    </div>
+    <form action="" method="post" class="det_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="title">
+            <p>{{photo.title}}</p>
+        </div>
+        <div class="wrapper_img">
+            <img src="{{ photo.photo.url }}">
+            {% if photo_res %}
+            <img src="{{ photo_res }}">
+            {% endif %}
+        </div>
+
+        <div class="wrapper_button">
+            <button type="submit">Детектировать</button>
+            <div class="new_photo">
+                <label for="newphoto">Детектировать свое фото ↓</label>
+                <input type="file" id='newphoto' name='new_photo'>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
